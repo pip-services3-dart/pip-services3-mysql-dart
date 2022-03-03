@@ -583,8 +583,7 @@ class MySqlPersistence<T>
       }
 
       var res = await client_!.query(query);
-      var count =
-          res.toList().isNotEmpty ? res.toList().toList()[0]['count'] : 0;
+      var count = res.toList().isNotEmpty ? res.toList()[0]['count'] : 0;
 
       var page = new DataPage<T>(items, count);
       return page;
@@ -609,7 +608,7 @@ class MySqlPersistence<T>
     }
     var res = await client_!.query(query);
 
-    var count = res.toList().isNotEmpty ? res.toList().toList()[0]['count'] : 0;
+    var count = res.toList().isNotEmpty ? res.toList()[0]['count'] : 0;
 
     logger_.trace(
         correlationId, "Counted %d items in %s", [count, this.tableName_]);
@@ -671,7 +670,7 @@ class MySqlPersistence<T>
     query += " LIMIT 1" + " OFFSET " + pos.toString();
 
     res = await client_!.query(query);
-    var item = res.toList().isNotEmpty ? res.toList().toList()[0] : null;
+    var item = res.toList().isNotEmpty ? res.toList()[0] : null;
 
     if (item == null)
       this.logger_.trace(
