@@ -1,0 +1,16 @@
+name: pip_services3_mysql
+version: 1.0.0
+description: This framework is part of the [Pip.Services](https://github.com/pip-services/pip-services) project. MySQL components for Pip.Services in Dart
+homepage: https://github.com/pip-services3-dart/pip-services3-mysql-dart
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  pip_services3_commons: ^1.1.3
+  pip_services3_components: ^1.1.2
+  pip_services3_data: ^1.1.1
+  mysql1: ^0.19.2
+ 
+dev_dependencies:
+  test: ^1.17.12

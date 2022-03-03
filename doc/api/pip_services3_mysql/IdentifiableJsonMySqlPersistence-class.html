@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IdentifiableJsonMySqlPersistence class from the pip_services3_mysql library, for the Dart programming language.">
+  <title>IdentifiableJsonMySqlPersistence class - pip_services3_mysql library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">pip_services3_mysql</a></li>
+    <li><a href="../pip_services3_mysql/pip_services3_mysql-library.html">pip_services3_mysql</a></li>
+    <li class="self-crumb">IdentifiableJsonMySqlPersistence<span class="signature">&lt;<wbr><span class="type-parameter">T extends <a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/IIdentifiable-class.html">IIdentifiable</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>&gt;</span></span>, <span class="type-parameter">K</span>&gt;</span> class</li>
+  </ol>
+  <div class="self-name">IdentifiableJsonMySqlPersistence</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">IdentifiableJsonMySqlPersistence&lt;<wbr><span class="type-parameter">T extends IIdentifiable&lt;<wbr><span class="type-parameter">K</span>&gt;</span>, <span class="type-parameter">K</span>&gt;</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Abstract persistence component that stores data in MySQL in JSON or JSONB fields
+and implements a number of CRUD operations over data items with unique ids.
+The data items must implement <a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/IIdentifiable-class.html">IIdentifiable</a> interface.</p>
+<p>The JSON table has only two fields: id and data.</p>
+<p>In basic scenarios child classes shall only override <a href="../pip_services3_mysql/MySqlPersistence/getPageByFilter_.html">getPageByFilter_</a>,
+<a href="../pip_services3_mysql/MySqlPersistence/getListByFilter_.html">getListByFilter_</a> or <a href="../pip_services3_mysql/MySqlPersistence/deleteByFilter_.html">deleteByFilter_</a> operations with specific filter function.
+All other operations can be used out of the box.</p>
+<p>In complex scenarios child classes can implement additional operations by
+accessing this.connection_ and this.client_ properties.</p>
+<h3 id="configuration-parameters">Configuration parameters</h3>
+<ul>
+<li>
+<p><code>table</code>:                  (optional) MySQL table name</p>
+</li>
+<li>
+<p><code>schema</code>:                 (optional) MySQL schema name</p>
+</li>
+<li>
+<p><code>connection(s)</code>:</p>
+<ul>
+<li><code>discovery_key</code>:             (optional) a key to retrieve the connection from <a href="https://pub.dev/documentation/pip_services3_components/1.2.2/pip_services3_components/IDiscovery-class.html">IDiscovery</a></li>
+<li><code>host</code>:                      host name or IP address</li>
+<li><code>port</code>:                      port number (default: 27017)</li>
+<li><code>uri</code>:                       resource URI or connection string with all parameters in it</li>
+</ul>
+</li>
+<li>
+<p><code>credential(s)</code>:</p>
+<ul>
+<li><code>store_key</code>:                 (optional) a key to retrieve the credentials from <a href="https://pub.dev/documentation/pip_services3_components/1.2.2/pip_services3_components/ICredentialStore-class.html">ICredentialStore</a></li>
+<li><code>username</code>:                  (optional) user name</li>
+<li><code>password</code>:                  (optional) user password</li>
+</ul>
+</li>
+<li>
+<p><code>options</code>:</p>
+<ul>
+<li><code>connect_timeout</code>:      (optional) number of milliseconds to wait before timing out when connecting a new client (default: 10000)</li>
+</ul>
+<p>Note: the options below are currently not supported.</p>
+<ul>
+<li><code>idle_timeout</code>:         (optional) number of milliseconds a client must sit idle in the pool and not be checked out (default: 10000)</li>
+<li><code>max_pool_size</code>:        (optional) maximum number of clients the pool should contain (default: 10)</li>
+</ul>
+</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li>*:logger:*:*:1.0           (optional) <a href="https://pub.dev/documentation/pip_services3_components/1.2.2/pip_services3_components/ILogger-class.html">ILogger</a> components to pass log messages</li>
+<li>*:discovery:*:*:1.0        (optional) <a href="https://pub.dev/documentation/pip_services3_components/1.2.2/pip_services3_components/IDiscovery-class.html">IDiscovery</a> services</li>
+<li>*:credential-store:*:*:1.0 (optional) Credential stores to resolve credentials</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code>class MyMySqlPersistence extends IdentifiableJsonMySqlPersistence&lt;MyData, String&gt; {
+  MyMySqlPersistence() : super('mydata', null);
+
+  @override
+  void defineSchema_() {
+    this.clearSchema();
+    this.ensureTable_();
+    this.ensureSchema_('ALTER TABLE `' +
+        this.tableName_! +
+        '` ADD `data_key` VARCHAR(50) AS (JSON_UNQUOTE(`data`-&gt;"\$.key"))');
+    this.ensureIndex_(
+        this.tableName_! + '_json_key', {"data_key": 1}, {'unique': true});
+  }
+
+  @override
+  Future&lt;DataPage&lt;MyData&gt;&gt; getPageByFilter(
+      String? correlationId, FilterParams? filter, PagingParams? paging) async {
+    filter = filter ?? new FilterParams();
+    var key = filter.getAsNullableString('key');
+
+    var filterCondition = null;
+    if (key != null) {
+      filterCondition += "`key`='" + key + "'";
+    }
+
+    return super
+        .getPageByFilter_(correlationId, filterCondition, paging, null, null);
+  }
+}
+
+var persistence = MyMySqlPersistence();
+persistence
+    .configure(ConfigParams.fromTuples(["host", "localhost", "port", 27017]));
+await persistence.open(null);
+var item = await persistence.create(null, MyData());
+var page = await persistence.getPageByFilter(
+    null, FilterParams.fromTuples(["key", "ABC"]), null);
+print(page.data);
+var deleted = await persistence.deleteById(null, '1');
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object-class.html">Object</a></li>
+          <li><a href="../pip_services3_mysql/MySqlPersistence-class.html">MySqlPersistence</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
+          <li><a href="../pip_services3_mysql/IdentifiableMySqlPersistence-class.html">IdentifiableMySqlPersistence</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">K</span>&gt;</span></li>
+          <li>IdentifiableJsonMySqlPersistence</li>
+        </ul></dd>
+
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="IdentifiableJsonMySqlPersistence" class="callable">
+          <span class="name"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/IdentifiableJsonMySqlPersistence.html">IdentifiableJsonMySqlPersistence</a></span><span class="signature">(<span class="parameter" id="-param-tableName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">tableName</span>, </span><span class="parameter" id="-param-schemaName"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">schemaName</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new instance of the persistence component. <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/IdentifiableJsonMySqlPersistence.html">[...]</a>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="autoGenerateId_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/autoGenerateId_.html">autoGenerateId_</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.1/dart-core/bool-class.html">bool</a></span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="client_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/client_.html">client_</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/mysql1/0.19.2/mysql1/MySqlConnection-class.html">MySqlConnection</a>?</span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="connection_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/connection_.html">connection_</a></span>
+  <span class="signature">&#8596; <a href="../pip_services3_mysql/MySqlConnection-class.html">MySqlConnection</a>?</span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="databaseName_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/databaseName_.html">databaseName_</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="dependencyResolver_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/dependencyResolver_.html">dependencyResolver_</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/DependencyResolver-class.html">DependencyResolver</a></span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object. <a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">[...]</a>
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="logger_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/logger_.html">logger_</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/pip_services3_components/1.2.2/pip_services3_components/CompositeLogger-class.html">CompositeLogger</a></span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="maxPageSize_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/maxPageSize_.html">maxPageSize_</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.1/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object. 
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="schemaName_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/schemaName_.html">schemaName_</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+        <dt id="tableName_" class="property inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/tableName_.html">tableName_</a></span>
+  <span class="signature">&#8596; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> 
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">read / write, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="clear" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/clear.html">clear</a></span><span class="signature">(<wbr><span class="parameter" id="clear-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears component state. <a href="../pip_services3_mysql/MySqlPersistence/clear.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="clearSchema" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/clearSchema.html">clearSchema</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears all auto-created objects 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="close" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/close.html">close</a></span><span class="signature">(<wbr><span class="parameter" id="close-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Closes component and frees used resources. <a href="../pip_services3_mysql/MySqlPersistence/close.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="configure" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/configure.html">configure</a></span><span class="signature">(<wbr><span class="parameter" id="configure-param-config"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/ConfigParams-class.html">ConfigParams</a></span> <span class="parameter-name">config</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Configures component by passing configuration parameters. <a href="../pip_services3_mysql/MySqlPersistence/configure.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="convertFromPublic_" class="callable">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertFromPublic_.html">convertFromPublic_</a></span><span class="signature">(<wbr><span class="parameter" id="convertFromPublic_-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Convert object value from public to internal format. <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertFromPublic_.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="convertFromPublicPartial_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/convertFromPublicPartial_.html">convertFromPublicPartial_</a></span><span class="signature">(<wbr><span class="parameter" id="convertFromPublicPartial_-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Converts the given object from the public partial format. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/convertFromPublicPartial_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="convertToPublic_" class="callable">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertToPublic_.html">convertToPublic_</a></span><span class="signature">(<wbr><span class="parameter" id="convertToPublic_-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Converts object value from internal to public format. <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertToPublic_.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+        <dt id="create" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/create.html">create</a></span><span class="signature">(<wbr><span class="parameter" id="create-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="create-param-item"><span class="type-annotation">T?</span> <span class="parameter-name">item</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Creates a data item. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/create.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="createSchema_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/createSchema_.html">createSchema_</a></span><span class="signature">(<wbr><span class="parameter" id="createSchema_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="defineSchema_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/defineSchema_.html">defineSchema_</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Defines database schema via auto create objects or convenience methods. 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="deleteByFilter_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/deleteByFilter_.html">deleteByFilter_</a></span><span class="signature">(<wbr><span class="parameter" id="deleteByFilter_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="deleteByFilter_-param-filter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Deletes data items that match to a given filter. <a href="../pip_services3_mysql/MySqlPersistence/deleteByFilter_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="deleteById" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteById.html">deleteById</a></span><span class="signature">(<wbr><span class="parameter" id="deleteById-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="deleteById-param-id"><span class="type-annotation">K?</span> <span class="parameter-name">id</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Deleted a data item by it's unique id. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteById.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="deleteByIds" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteByIds.html">deleteByIds</a></span><span class="signature">(<wbr><span class="parameter" id="deleteByIds-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="deleteByIds-param-ids"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>&gt;</span></span> <span class="parameter-name">ids</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Deletes multiple data items by their unique ids. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteByIds.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="ensureIndex_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/ensureIndex_.html">ensureIndex_</a></span><span class="signature">(<wbr><span class="parameter" id="ensureIndex_-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="ensureIndex_-param-keys"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">keys</span>, </span><span class="parameter" id="ensureIndex_-param-options"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a>?</span> <span class="parameter-name">options</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds index definition to create it on opening <a href="../pip_services3_mysql/MySqlPersistence/ensureIndex_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="ensureSchema_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/ensureSchema_.html">ensureSchema_</a></span><span class="signature">(<wbr><span class="parameter" id="ensureSchema_-param-schemaStatement"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">schemaStatement</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds a statement to schema definition <a href="../pip_services3_mysql/MySqlPersistence/ensureSchema_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="ensureTable_" class="callable">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/ensureTable_.html">ensureTable_</a></span><span class="signature">(<wbr><span class="parameter" id="ensureTable_-param-idType">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">idType</span> = <span class="default-value">&#39;VARCHAR(32)&#39;</span>, </span><span class="parameter" id="ensureTable_-param-dataType"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span> <span class="parameter-name">dataType</span> = <span class="default-value">&#39;JSON&#39;</span>}</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds DML statement to automatically create JSON(B) table <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/ensureTable_.html">[...]</a>
+  
+
+</dd>
+
+        <dt id="generateColumns_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/generateColumns_.html">generateColumns_</a></span><span class="signature">(<wbr><span class="parameter" id="generateColumns_-param-values"><span class="type-annotation">dynamic</span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Generates a list of column names to use in SQL statements like: "column1,column2,column3" <a href="../pip_services3_mysql/MySqlPersistence/generateColumns_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="generateParameters_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/generateParameters_.html">generateParameters_</a></span><span class="signature">(<wbr><span class="parameter" id="generateParameters_-param-values"><span class="type-annotation">dynamic</span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Generates a list of value parameters to use in SQL statements like: "$1,$2,$3" <a href="../pip_services3_mysql/MySqlPersistence/generateParameters_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="generateSetParameters_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/generateSetParameters_.html">generateSetParameters_</a></span><span class="signature">(<wbr><span class="parameter" id="generateSetParameters_-param-values"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Generates a list of column sets to use in UPDATE statements like: column1=$1,column2=$2 <a href="../pip_services3_mysql/MySqlPersistence/generateSetParameters_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="generateValues_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/generateValues_.html">generateValues_</a></span><span class="signature">(<wbr><span class="parameter" id="generateValues_-param-values"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Generates a list of column parameters <a href="../pip_services3_mysql/MySqlPersistence/generateValues_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getCountByFilter_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/getCountByFilter_.html">getCountByFilter_</a></span><span class="signature">(<wbr><span class="parameter" id="getCountByFilter_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getCountByFilter_-param-filter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/int-class.html">int</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a number of data items retrieved by a given filter. <a href="../pip_services3_mysql/MySqlPersistence/getCountByFilter_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getListByFilter_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/getListByFilter_.html">getListByFilter_</a></span><span class="signature">(<wbr><span class="parameter" id="getListByFilter_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getListByFilter_-param-filter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span>, </span><span class="parameter" id="getListByFilter_-param-sort"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sort</span>, </span><span class="parameter" id="getListByFilter_-param-select"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">select</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a list of data items retrieved by a given filter and sorted according to sort parameters. <a href="../pip_services3_mysql/MySqlPersistence/getListByFilter_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getListByIds" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getListByIds.html">getListByIds</a></span><span class="signature">(<wbr><span class="parameter" id="getListByIds-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getListByIds-param-ids"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>&gt;</span></span> <span class="parameter-name">ids</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a list of data items retrieved by given unique ids. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getListByIds.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getOneById" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getOneById.html">getOneById</a></span><span class="signature">(<wbr><span class="parameter" id="getOneById-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getOneById-param-id"><span class="type-annotation">K</span> <span class="parameter-name">id</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a data item by its unique id. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getOneById.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getOneRandom_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/getOneRandom_.html">getOneRandom_</a></span><span class="signature">(<wbr><span class="parameter" id="getOneRandom_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getOneRandom_-param-filter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="getPageByFilter_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/getPageByFilter_.html">getPageByFilter_</a></span><span class="signature">(<wbr><span class="parameter" id="getPageByFilter_-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="getPageByFilter_-param-filter"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span>, </span><span class="parameter" id="getPageByFilter_-param-paging"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/PagingParams-class.html">PagingParams</a>?</span> <span class="parameter-name">paging</span>, </span><span class="parameter" id="getPageByFilter_-param-sort"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sort</span>, </span><span class="parameter" id="getPageByFilter_-param-select"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">select</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/DataPage-class.html">DataPage</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets a page of data items retrieved by a given filter and sorted according to sort parameters. <a href="../pip_services3_mysql/MySqlPersistence/getPageByFilter_.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="isOpen" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/isOpen.html">isOpen</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the component is opened. <a href="../pip_services3_mysql/MySqlPersistence/isOpen.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed. <a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="open" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/open.html">open</a></span><span class="signature">(<wbr><span class="parameter" id="open-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Opens the component. <a href="../pip_services3_mysql/MySqlPersistence/open.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="quotedTableName_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/quotedTableName_.html">quotedTableName_</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="quoteIdentifier_" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/quoteIdentifier_.html">quoteIdentifier_</a></span><span class="signature">(<wbr><span class="parameter" id="quoteIdentifier_-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+   
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="set" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="set-param-item"><span class="type-annotation">T?</span> <span class="parameter-name">item</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets a data item. If the data item exists it updates it,
+otherwise it create a new data item. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/set.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="setReferences" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/setReferences.html">setReferences</a></span><span class="signature">(<wbr><span class="parameter" id="setReferences-param-references"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/IReferences-class.html">IReferences</a></span> <span class="parameter-name">references</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets references to dependent components. <a href="../pip_services3_mysql/MySqlPersistence/setReferences.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object. <a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="unsetReferences" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/MySqlPersistence/unsetReferences.html">unsetReferences</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Unsets (clears) previously set references to dependent components. 
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="update" class="callable inherited">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/update.html">update</a></span><span class="signature">(<wbr><span class="parameter" id="update-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="update-param-item"><span class="type-annotation">T?</span> <span class="parameter-name">item</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Updates a data item. <a href="../pip_services3_mysql/IdentifiableMySqlPersistence/update.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="updatePartially" class="callable">
+  <span class="name"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/updatePartially.html">updatePartially</a></span><span class="signature">(<wbr><span class="parameter" id="updatePartially-param-correlationId"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">correlationId</span>, </span><span class="parameter" id="updatePartially-param-id"><span class="type-annotation">K?</span> <span class="parameter-name">id</span>, </span><span class="parameter" id="updatePartially-param-data"><span class="type-annotation"><a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/AnyValueMap-class.html">AnyValueMap</a>?</span> <span class="parameter-name">data</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Updates only few selected fields in a data item. <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/updatePartially.html">[...]</a>
+  <div class="features">override</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/2.15.1/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator. <a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">[...]</a>
+  <div class="features">inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">pip_services3_mysql</a></li>
+  <li><a href="../pip_services3_mysql/pip_services3_mysql-library.html">pip_services3_mysql</a></li>
+  <li class="self-crumb">IdentifiableJsonMySqlPersistence<span class="signature">&lt;<wbr><span class="type-parameter">T extends <a href="https://pub.dev/documentation/pip_services3_commons/1.1.6/pip_services3_commons/IIdentifiable-class.html">IIdentifiable</a><span class="signature">&lt;<wbr><span class="type-parameter">K</span>&gt;</span></span>, <span class="type-parameter">K</span>&gt;</span> class</li>
+</ol>
+
+
+    <h5>pip_services3_mysql library</h5>
+    <ol>
+  <li class="section-title"><a href="../pip_services3_mysql/pip_services3_mysql-library.html#classes">Classes</a></li>
+  <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence-class.html">IdentifiableJsonMySqlPersistence</a></li>
+  <li><a href="../pip_services3_mysql/IdentifiableMySqlPersistence-class.html">IdentifiableMySqlPersistence</a></li>
+  <li><a href="../pip_services3_mysql/MySqlConnection-class.html">MySqlConnection</a></li>
+  <li><a href="../pip_services3_mysql/MySqlConnectionResolver-class.html">MySqlConnectionResolver</a></li>
+  <li><a href="../pip_services3_mysql/MySqlPersistence-class.html">MySqlPersistence</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+    <li class="section-title"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence-class.html#constructors">Constructors</a></li>
+    <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/IdentifiableJsonMySqlPersistence.html">IdentifiableJsonMySqlPersistence</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/autoGenerateId_.html">autoGenerateId_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/client_.html">client_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/connection_.html">connection_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/databaseName_.html">databaseName_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/dependencyResolver_.html">dependencyResolver_</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/logger_.html">logger_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/maxPageSize_.html">maxPageSize_</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/schemaName_.html">schemaName_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/tableName_.html">tableName_</a></li>
+
+    <li class="section-title"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence-class.html#instance-methods">Methods</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/clear.html">clear</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/clearSchema.html">clearSchema</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/close.html">close</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/configure.html">configure</a></li>
+    <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertFromPublic_.html">convertFromPublic_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/convertFromPublicPartial_.html">convertFromPublicPartial_</a></li>
+    <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/convertToPublic_.html">convertToPublic_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/create.html">create</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/createSchema_.html">createSchema_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/defineSchema_.html">defineSchema_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/deleteByFilter_.html">deleteByFilter_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteById.html">deleteById</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/deleteByIds.html">deleteByIds</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/ensureIndex_.html">ensureIndex_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/ensureSchema_.html">ensureSchema_</a></li>
+    <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/ensureTable_.html">ensureTable_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/generateColumns_.html">generateColumns_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/generateParameters_.html">generateParameters_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/generateSetParameters_.html">generateSetParameters_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/generateValues_.html">generateValues_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/getCountByFilter_.html">getCountByFilter_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/getListByFilter_.html">getListByFilter_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getListByIds.html">getListByIds</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/getOneById.html">getOneById</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/getOneRandom_.html">getOneRandom_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/getPageByFilter_.html">getPageByFilter_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/isOpen.html">isOpen</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/open.html">open</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/quotedTableName_.html">quotedTableName_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/quoteIdentifier_.html">quoteIdentifier_</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/set.html">set</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/setReferences.html">setReferences</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/MySqlPersistence/unsetReferences.html">unsetReferences</a></li>
+    <li class="inherited"><a href="../pip_services3_mysql/IdentifiableMySqlPersistence/update.html">update</a></li>
+    <li><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence/updatePartially.html">updatePartially</a></li>
+
+    <li class="section-title inherited"><a href="../pip_services3_mysql/IdentifiableJsonMySqlPersistence-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    pip_services3_mysql
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+

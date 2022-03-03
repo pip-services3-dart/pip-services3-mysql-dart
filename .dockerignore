@@ -1,0 +1,13 @@
+/.vscode
+/.git
+/.gitignore
+/.dockerignore
+/doc
+/docker/Dockerfile*
+/docker/docker-compose*.yml
+/*.sh
+/*.ps1
+/example
+/.dart_tool
+/.packages
+/pubspec.lock
