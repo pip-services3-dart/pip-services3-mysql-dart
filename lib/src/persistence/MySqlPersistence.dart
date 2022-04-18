@@ -680,7 +680,7 @@ class MySqlPersistence<T>
           correlationId, "Retrieved random item from %s", [this.tableName_]);
 
     item = this.convertToPublic_(item);
-    return item as T;
+    return item as T?;
   }
 
   /// Creates a data item.
