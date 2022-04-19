@@ -172,7 +172,7 @@ class IdentifiableJsonMySqlPersistence<T extends IIdentifiable<K>, K>
     logger_.trace(correlationId, "Updated partially in %s with id = %s",
         [this.tableName_, id]);
 
-    var resValues = res.toList().isNotEmpty ? res.toList()[0] : null;
+    var resValues = res.toList().isNotEmpty ? res.toList()[0].fields : null;
     var newItem = this.convertToPublic_(resValues);
 
     return newItem;

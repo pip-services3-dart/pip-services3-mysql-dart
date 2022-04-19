@@ -670,16 +670,16 @@ class MySqlPersistence<T>
     query += " LIMIT 1" + " OFFSET " + pos.toString();
 
     res = await client_!.query(query);
-    var item = res.toList().isNotEmpty ? res.toList()[0] : null;
+    var mapItem = res.toList().isNotEmpty ? res.toList()[0].fields : null;
 
-    if (item == null)
+    if (mapItem == null)
       this.logger_.trace(
           correlationId, "Random item wasn't found from %s", [this.tableName_]);
     else
       this.logger_.trace(
           correlationId, "Retrieved random item from %s", [this.tableName_]);
 
-    item = this.convertToPublic_(item);
+    var item = this.convertToPublic_(mapItem);
     return item as T?;
   }
 
