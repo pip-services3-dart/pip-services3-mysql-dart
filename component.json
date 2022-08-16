@@ -1,6 +1,14 @@
 {
-    "name": "pip-services-mysql",
-    "registry": "pipdevs",
+    "name": "pip-services3-mysql",
+    "type": "module",
+    "language": "dart",
     "version": "1.0.2",
-    "build": "0"
+    "build": 0,
+    "registry": "pipdevs",
+    "artifacts": [
+        {
+            "name":  "<name>",
+            "type": "dart"
+        }
+    ]
 }
